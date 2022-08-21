@@ -1,15 +1,20 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { User } from "./components/User/User";
-import {
-  MAIN_URL,
-  SEARCH_USERS_URL,
-  API_KEY,
-  SEARCH_QUERY,
-} from './api/api';
+import { MAIN_URL, SEARCH_USERS_URL, API_KEY, SEARCH_QUERY } from "./api/api";
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<
+    {
+      id: string;
+      profile_image: {medium: string};
+      username: string;
+      name: string;
+      bio: string;
+      location: string;
+      links: { html: string };
+    }[]
+  >([]);
   useEffect(() => {
     async function getUsers() {
       try {
@@ -33,14 +38,17 @@ function App() {
           const { medium } = profile_image;
           const { html } = links;
 
+          const userLocation = location?.charAt(0).toUpperCase() + location?.slice(1) || "Somewhere";
+          const userBio = bio || "The user hasn't written a bio 😒"
+
           return (
             <User
               key={id}
               username={username}
               name={name}
-              bio={bio}
+              bio={userBio}
               src={medium}
-              location={location}
+              location={userLocation}
               profile={html}
             />
           );

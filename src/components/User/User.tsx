@@ -1,3 +1,5 @@
+import './User.css';
+
 interface UserProps {
   username: string;
   name: string;
@@ -20,8 +22,8 @@ export const User: React.FC<UserProps> = ({
       <div className="personalDesc">
         <p>Username: {username}</p>
         <p>Name: {name}</p>
-        <p>Location: {location ? location : "Somewhere"}</p>
-        <p>Bio: {bio ? bio : "The user hasn't written a bio 😒"}</p>
+        <p>Location: {location}</p>
+        <p>Bio: {bio}</p>
       </div>
       <div className="viewProfileWrapper">
         <img src={src} alt="Profile background" className="userImage" />
