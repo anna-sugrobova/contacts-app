@@ -1,24 +1,15 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { User } from "./components/User/User";
-import { MAIN_URL, SEARCH_USERS_URL, API_KEY, SEARCH_QUERY } from "./api/api";
+import uniqueId from 'lodash/uniqueId';
+import { MAIN_URL, SEARCH_QUERY } from "./api/api";
 
 function App() {
-  const [users, setUsers] = useState<
-    {
-      id: string;
-      profile_image: {medium: string};
-      username: string;
-      name: string;
-      bio: string;
-      location: string;
-      links: { html: string };
-    }[]
-  >([]);
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     async function getUsers() {
       try {
-        const request = `${MAIN_URL}${SEARCH_USERS_URL}?${API_KEY}&${SEARCH_QUERY}`;
+        const request = `${MAIN_URL}?${SEARCH_QUERY}`;
         const response = await fetch(request);
         let resultToUse = await response.json();
         setUsers(resultToUse.results);
@@ -33,23 +24,23 @@ function App() {
     <div className="App">
       <div className="usersContainer">
         {users.map((user) => {
-          const { id, profile_image, username, name, bio, location, links } =
-            user;
-          const { medium } = profile_image;
-          const { html } = links;
+          const { id, name, gender, location, email, phone, picture } = user;
+          const { value } = id;
+          const { medium } = picture;
 
-          const userLocation = location?.charAt(0).toUpperCase() + location?.slice(1) || "Somewhere";
-          const userBio = bio || "The user hasn't written a bio 😒"
+          if (!value) {
+            return value === uniqueId();
+          }
 
           return (
             <User
-              key={id}
-              username={username}
+              gender={gender}
+              key={value}
               name={name}
-              bio={userBio}
               src={medium}
-              location={userLocation}
-              profile={html}
+              email={email}
+              phone={phone}
+              location={location}
             />
           );
         })}
