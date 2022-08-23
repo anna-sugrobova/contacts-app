@@ -20,13 +20,13 @@ export const User: React.FC<UserProps> = ({
   return (
     <div className="wrapper">
       <div className="personalDesc">
-        <p>Name: {name.title} {name.first} {name.last}</p>
-        <p>Gender: {gender}</p>
-        <p>Email: {email}</p>
-        <p>Phone: {phone}</p>
-        <p>Location: {location.city}, {location.country}, {location.postcode}</p>
+        <p className='userFullName'><b>Name:</b> {name.title} {name.first} {name.last}</p>
+        <p className='userGender'><b>Gender:</b> {gender}</p>
+        <p><b>Email:</b> {email}</p>
+        <p><b>Phone:</b> {phone}</p>
+        <p><b>Location:</b> {location.city}, {location.country}, {location.postcode}</p>
       </div>
-      <div className="viewProfileWrapper">
+      <div className="userPhotoWrapper">
         <img src={src} alt="Profile background" className="userImage" />
       </div>
     </div>

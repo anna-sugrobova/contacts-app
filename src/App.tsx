@@ -1,7 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import { LoginPage } from './screens/loginPage/LoginPage';
 import { ContactsPage } from './screens/ContactsPage';
-import "./App.css";
 
 function App() {
   return (
