@@ -30,5 +30,5 @@ export const User: React.FC<UserProps> = ({
         <img src={src} alt="Profile background" className="userImage" />
       </div>
     </div>
-  );
-};
+  )
+}

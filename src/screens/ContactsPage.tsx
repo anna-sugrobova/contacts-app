@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { User } from "../components/User/User";
 import uniqueId from 'lodash/uniqueId';
 import { MAIN_URL, SEARCH_QUERY } from "../api/api";
+import { setUsersData } from '../redux/userSlice';
+import { useAppDispatch } from '../redux/store';
+import { useAppSelector } from '../redux/hooks';
 import '../components/User/User.css';
 
-export const ContactsPage: React.FC = () => {
-  const [users, setUsers] = useState([]);
+export const UsersComponent: React.FC = () => {
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     async function getUsers() {
@@ -13,25 +16,26 @@ export const ContactsPage: React.FC = () => {
         const request = `${MAIN_URL}?${SEARCH_QUERY}`;
         const response = await fetch(request);
         let resultToUse = await response.json();
-        setUsers(resultToUse.results);
+        dispatch(setUsersData(resultToUse.results));
       } catch (error) {
         console.log(error);
       }
     }
     getUsers();
-  }, []);
+  }, [dispatch]); 
 
+  const users = useAppSelector(state => state.contacts.users);
 
   return (
     <div className="usersContainer">
-      {users.map((user) => {
+      { users.slice(0, 20).map((user) => {
         const { id, name, gender, location, email, phone, picture } = user;
         const { value } = id;
         const { large } = picture;
 
         if (!value) {
-          return value === uniqueId();
-        }
+          return value === uniqueId()
+        } 
 
         return (
           <User
@@ -43,8 +47,9 @@ export const ContactsPage: React.FC = () => {
             phone={phone}
             location={location}
           />
-        );
-      })}
+        )
+      })
+    }
     </div>
   );
 };
