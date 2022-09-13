@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
       <div className="loginWrapper">
         <div className="formWrapper">
           <form className="loginForm" onSubmit={handleSubmit}>
-            <h1 className="formHeader">Welcome!</h1>
+            <h1 className="formHeader">Welcome</h1>
             <div>
               <input 
                 className="loginFormInput login"

@@ -6,7 +6,7 @@ const SLICE_NAME = "users";
 const initialState = {
   users: [
     {
-      id: { value: "" },
+      id: "",
       name: { title: "", first: "", last: "" },
       gender: "",
       location: { city: "", country: "", postcode: "" },
@@ -22,11 +22,21 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     setUsersData: (state, { payload }: PayloadAction<UserDataType[]>) => {
-      state.users = [...state.users, ...payload];
+      state.users = [...payload];
+    },
+    deleteUser: (
+      state,
+      { payload }: PayloadAction<{ id: string }>
+    ) => {
+      const newUsers = state.users.filter(
+        (user) => user.id !== payload.id
+      );
+
+      return { users: newUsers };
     },
   },
 });
 
-export const { setUsersData } = usersSlice.actions;
+export const { setUsersData, deleteUser } = usersSlice.actions;
 
 export default usersSlice.reducer;
