@@ -1,0 +1,42 @@
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  width: 60vw;
+  background-color: #fff;
+}
+
+.modal-header,
+.modal-footer {
+  padding: 20px;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalLabel {
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.modalInput {
+  border: none;
+  font-size: 14px;
+}

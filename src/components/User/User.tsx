@@ -1,4 +1,5 @@
 import ClearIcon from "@mui/icons-material/Clear";
+import EditIcon from "@mui/icons-material/Edit";
 import SvgIcon from "@mui/material/SvgIcon";
 import { useCallback } from "react";
 import { deleteUser } from "../../redux/userSlice";
@@ -7,12 +8,13 @@ import "./User.css";
 
 interface UserProps {
   id: string;
-  name: { title: string; first: string; last: string };
+  name: string;
   gender: string;
   location: { city: string; country: string; postcode: string };
   src: string;
   email: string;
   phone: string;
+  onEdit: (id: string) => void;
 }
 
 export const User: React.FC<UserProps> = ({
@@ -23,6 +25,7 @@ export const User: React.FC<UserProps> = ({
   gender,
   email,
   phone,
+  onEdit,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -37,9 +40,14 @@ export const User: React.FC<UserProps> = ({
           <ClearIcon />
         </SvgIcon>
       </button>
+      <button className="editUserIcon" onClick={() => onEdit(id)}>
+        <SvgIcon>
+          <EditIcon />
+        </SvgIcon>
+      </button>
       <div className="personalDesc">
         <p className="userFullName">
-          <b>Name:</b> {name.title} {name.first} {name.last}
+          <b>Name:</b> {name}
         </p>
         <p className="userGender">
           <b>Gender:</b> {gender}

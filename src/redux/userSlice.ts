@@ -7,7 +7,7 @@ const initialState = {
   users: [
     {
       id: "",
-      name: { title: "", first: "", last: "" },
+      name: "",
       gender: "",
       location: { city: "", country: "", postcode: "" },
       email: "",
@@ -24,19 +24,25 @@ const usersSlice = createSlice({
     setUsersData: (state, { payload }: PayloadAction<UserDataType[]>) => {
       state.users = [...payload];
     },
-    deleteUser: (
-      state,
-      { payload }: PayloadAction<{ id: string }>
-    ) => {
-      const newUsers = state.users.filter(
-        (user) => user.id !== payload.id
-      );
+    deleteUser: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const newUsers = state.users.filter((user) => user.id !== payload.id);
 
       return { users: newUsers };
+    },
+    updateUserData: (state, { payload: editedUser }) => {
+      return {
+        ...state,
+        users: state.users.map((user) => {
+          if (user.id === editedUser.id) {
+            return editedUser;
+          }
+          return user;
+        }),
+      };
     },
   },
 });
 
-export const { setUsersData, deleteUser } = usersSlice.actions;
+export const { setUsersData, deleteUser, updateUserData } = usersSlice.actions;
 
 export default usersSlice.reducer;
