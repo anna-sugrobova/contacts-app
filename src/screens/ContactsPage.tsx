@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { User } from "../components/User/User";
 import uniqueId from "lodash/uniqueId";
 import { MAIN_URL, SEARCH_QUERY } from "../api/api";
@@ -7,9 +7,13 @@ import { useAppDispatch } from "../redux/store";
 import { useAppSelector } from "../redux/hooks";
 import { UserDataFromApiType } from "../types/userTypes";
 import "../components/User/User.css";
+import useModal from "../hooks/useModal";
+import Modal from "../components/Modal/Modal";
+import { EditUserModal } from "../components/EditUserModal/EditUserModal";
 
-export const UsersComponent: React.FC = () => {
+export const ContactsPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     async function getUsers() {
@@ -19,10 +23,16 @@ export const UsersComponent: React.FC = () => {
         let users = await response.json();
         dispatch(
           setUsersData(
-            users.results.map((user: UserDataFromApiType) => ({
-              ...user,
-              id: user.id.value,
-            }))
+            users.results.map((user: UserDataFromApiType) => {
+              const { id, name } = user;
+              const idExists = id.name && id.value;
+
+              return {
+                ...user,
+                id: idExists ? `${id.name}${id.value}` : uniqueId(),
+                name: `${name.title} ${name.first} ${name.last}`,
+              };
+            })
           )
         );
       } catch (error) {
@@ -33,16 +43,18 @@ export const UsersComponent: React.FC = () => {
   }, [dispatch]);
 
   const users = useAppSelector((state) => state.contacts.users);
+  const [userIdToEdit, setUserIdToEdit] = useState("");
+
+  const editHandler = (id: string) => {
+    toggle();
+    setUserIdToEdit(id);
+  };
 
   return (
     <div className="usersContainer">
       {users.slice(0, 20).map((user) => {
         const { id, name, gender, location, email, phone, picture } = user;
         const { large } = picture;
-
-        if (!id) {
-          return id === uniqueId();
-        }
 
         return (
           <User
@@ -54,9 +66,13 @@ export const UsersComponent: React.FC = () => {
             email={email}
             phone={phone}
             location={location}
+            onEdit={editHandler}
           />
         );
       })}
+      <Modal isShowing={isShowing} hide={toggle}>
+        <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggle} />
+      </Modal>
     </div>
   );
 };
