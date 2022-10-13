@@ -1,5 +1,7 @@
 import ClearIcon from "@mui/icons-material/Clear";
-import EditIcon from "@mui/icons-material/Edit";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneIcon from "@mui/icons-material/Phone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SvgIcon from "@mui/material/SvgIcon";
 import { useCallback } from "react";
 import { deleteUser } from "../../redux/userSlice";
@@ -10,7 +12,7 @@ interface UserProps {
   id: string;
   name: string;
   gender: string;
-  location: { city: string; country: string; postcode: string };
+  location: string;
   src: string;
   email: string;
   phone: string;
@@ -22,7 +24,6 @@ export const User: React.FC<UserProps> = ({
   src,
   name,
   location,
-  gender,
   email,
   phone,
   onEdit,
@@ -35,37 +36,38 @@ export const User: React.FC<UserProps> = ({
 
   return (
     <div className="wrapper">
+      <div className="userPhotoWrapper">
+        <img src={src} alt="Profile background" className="userImage" />
+      </div>
       <button className="deleteUserIcon" onClick={handleDeleteUser}>
         <SvgIcon>
           <ClearIcon />
         </SvgIcon>
       </button>
-      <button className="editUserIcon" onClick={() => onEdit(id)}>
-        <SvgIcon>
-          <EditIcon />
-        </SvgIcon>
-      </button>
       <div className="personalDesc">
-        <p className="userFullName">
-          <b>Name:</b> {name}
-        </p>
-        <p className="userGender">
-          <b>Gender:</b> {gender}
-        </p>
-        <p>
-          <b>Email:</b> {email}
-        </p>
-        <p>
-          <b>Phone:</b> {phone}
-        </p>
-        <p>
-          <b>Location:</b> {location.city}, {location.country},{" "}
-          {location.postcode}
-        </p>
-        <div className="userPhotoWrapper">
-          <img src={src} alt="Profile background" className="userImage" />
+        <h3 className="userFullName">{name}</h3>
+        <div className="user-data-container">
+          <SvgIcon>
+            <MailOutlineIcon />
+          </SvgIcon>
+          <p className="user-data-text">{email}</p>
+        </div>
+        <div className="user-data-container">
+          <SvgIcon>
+            <PhoneIcon />
+          </SvgIcon>
+          <p className="user-data-text">{phone}</p>
+        </div>
+        <div className="user-data-container">
+          <SvgIcon>
+            <LocationOnIcon />
+          </SvgIcon>
+          <p className="user-data-text">{location}</p>
         </div>
       </div>
+      <button className="edit-user-button" onClick={() => onEdit(id)}>
+        Edit
+      </button>
     </div>
   );
 };

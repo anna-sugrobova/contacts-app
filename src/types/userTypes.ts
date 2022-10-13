@@ -2,7 +2,7 @@ export type UserDataType = {
   id: string;
   name: string;
   gender: string;
-  location: { city: string; country: string; postcode: string };
+  location: string;
   picture: { large: string };
   email: string;
   phone: string;

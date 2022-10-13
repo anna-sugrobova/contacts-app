@@ -24,13 +24,14 @@ export const ContactsPage: React.FC = () => {
         dispatch(
           setUsersData(
             users.results.map((user: UserDataFromApiType) => {
-              const { id, name } = user;
+              const { id, name, location } = user;
               const idExists = id.name && id.value;
 
               return {
                 ...user,
                 id: idExists ? `${id.name}${id.value}` : uniqueId(),
                 name: `${name.title} ${name.first} ${name.last}`,
+                location: `${location.city} ${location.country} ${location.postcode}`,
               };
             })
           )
