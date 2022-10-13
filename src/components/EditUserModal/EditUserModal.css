@@ -11,13 +11,12 @@
 }
 
 .modal-content {
-  width: 60vw;
   background-color: #fff;
 }
 
-.modal-header,
-.modal-footer {
+.editUserModal-header {
   padding: 20px;
+  text-align: center;
 }
 
 .modal-title {
@@ -39,4 +38,27 @@
 .modalInput {
   border: none;
   font-size: 14px;
+  margin-left: 4px;
+}
+
+.save-user-button {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  display: block;
+  border: none;
+  padding: 15px 20px;
+  background-color: #87ceeb;
+  border-radius: 1.5rem / 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out,
+    transform 200ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  cursor: pointer;
+}
+
+.save-user-button:hover {
+  background-color: #4682b4;
+  transform: scale(1.02);
 }

@@ -1,2 +1,3 @@
 export const MAIN_URL = "https://randomuser.me/api/";
-export const SEARCH_QUERY = "results=20";
+const COUNT_OF_USERS="20";
+export const SEARCH_QUERY = `results=${COUNT_OF_USERS}`;

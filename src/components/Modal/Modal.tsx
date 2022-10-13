@@ -1,5 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ClearIcon from "@mui/icons-material/Clear";
+import SvgIcon from "@mui/material/SvgIcon";
+
 import "./Modal.css";
 
 type ModalProps = {
@@ -29,7 +32,9 @@ const Modal = ({ isShowing, hide, children }: ModalProps) =>
                   aria-label="Close"
                   onClick={hide}
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <SvgIcon>
+                    <ClearIcon />
+                  </SvgIcon>
                 </button>
               </div>
               {children}

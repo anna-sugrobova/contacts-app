@@ -24,11 +24,14 @@
 .modal {
   z-index: 100;
   background: white;
-  position: relative;
-  margin: 1.75rem auto;
-  border-radius: 3px;
+  border-radius: 15px;
   max-width: 500px;
   padding: 2rem;
+  width: 60vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-header {
@@ -40,8 +43,12 @@
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
-  opacity: 0.3;
   cursor: pointer;
   border: none;
+  background: none;
+  padding: 0;
+}
+
+.modal-close-button:hover {
+  transform: scale(1.1);
 }

@@ -23,11 +23,7 @@ export const EditUserModal = ({
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("event.target.name: ", event.target.name);
-    console.log("event.target.value: ", event.target.value);
-    console.log("userToEdit before changing: ", userToEdit);
     setUserToEdit({ ...userToEdit, [name]: value });
-    console.log("userToEdit: ", userToEdit);
   };
 
   const dispatch = useAppDispatch();
@@ -39,8 +35,8 @@ export const EditUserModal = ({
 
   return (
     <div className="modal-content">
-      <div className="modal-header">
-        <h4 className="modal-title">User profile</h4>
+      <div className="editUserModal-header">
+        <h3 className="modal-title">User profile</h3>
       </div>
       <div className="modal-body">
         <label htmlFor="Name" className="modalLabel">
@@ -98,7 +94,11 @@ export const EditUserModal = ({
             onChange={handleChange}
           />
         </label>
-        <button onClick={saveDataHandler}>Save</button>
+      </div>
+      <div className="editUserModal-footer">
+        <button onClick={saveDataHandler} className="save-user-button">
+          Save
+        </button>
       </div>
     </div>
   );
