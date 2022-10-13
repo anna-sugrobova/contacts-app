@@ -9,7 +9,7 @@ const initialState = {
       id: "",
       name: "",
       gender: "",
-      location: { city: "", country: "", postcode: "" },
+      location: "",
       email: "",
       phone: "",
       picture: { large: "" },
