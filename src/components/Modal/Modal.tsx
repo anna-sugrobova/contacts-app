@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ClearIcon from "@mui/icons-material/Clear";
 import SvgIcon from "@mui/material/SvgIcon";
 
-import "./Modal.css";
+import "./Modal.scss";
 
 type ModalProps = {
   isShowing: boolean;

@@ -6,6 +6,7 @@
   transition: box-shadow 200ms linear 0ms;
   text-align: start;
   position: relative;
+  background-color: #f3f3f3;
 }
 
 .userImage {
@@ -77,15 +78,6 @@
   width: 260px;
 }
 
-.usersContainer {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  max-width: 1100px;
-  width: 90%;
-  margin: 30px auto;
-}
-
 .deleteUserIcon {
   border: none;
   background: none;
@@ -101,6 +93,9 @@
 }
 
 .edit-user-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #87ceeb;
   font-size: 16px;
   font-weight: 700;
@@ -134,4 +129,10 @@
 
 .user-data-text {
   margin-left: 10px;
+}
+
+.MuiSvgIcon-root.edit-icon {
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
 }

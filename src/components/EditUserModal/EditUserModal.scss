@@ -15,8 +15,8 @@
 }
 
 .editUserModal-header {
-  padding: 20px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .modal-title {
@@ -27,26 +27,30 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 20px 10px;
 }
 
 .modalLabel {
+  display: flex;
   font-weight: 600;
   padding-bottom: 10px;
 }
 
 .modalInput {
   border: none;
-  font-size: 14px;
+  font-size: 16px;
   margin-left: 4px;
+  width: 100%;
 }
 
 .save-user-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   font-size: 16px;
   font-weight: 700;
   line-height: 1;
-  display: block;
   border: none;
   padding: 15px 20px;
   background-color: #87ceeb;
@@ -61,4 +65,10 @@
 .save-user-button:hover {
   background-color: #4682b4;
   transform: scale(1.02);
+}
+
+.MuiSvgIcon-root.save-icon {
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
 }
