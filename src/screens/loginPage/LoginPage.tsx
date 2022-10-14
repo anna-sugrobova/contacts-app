@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
+import "./LoginPage.scss";
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -9,18 +9,17 @@ export const LoginPage: React.FC = () => {
     e.preventDefault();
     try {
       axios({
-        method: 'GET',
-        url: 'http://localhost:3000/login',
-      })
-      .then((response) => {
+        method: "GET",
+        url: "http://localhost:3000/login",
+      }).then((response) => {
         if (response.data.success) {
-          navigate('/contacts');
+          navigate("/contacts");
         }
-      })
-    } catch(e) {
+      });
+    } catch (e) {
       console.log(e);
-    };
-  }
+    }
+  };
 
   return (
     <div className="pageStyles">
@@ -29,18 +28,18 @@ export const LoginPage: React.FC = () => {
           <form className="loginForm" onSubmit={handleSubmit}>
             <h1 className="formHeader">Welcome</h1>
             <div>
-              <input 
+              <input
                 className="loginFormInput login"
-                type="email" 
+                type="email"
                 placeholder="Email"
                 required
               />
             </div>
             <div>
               <input
-                className="loginFormInput password" 
-                type="password" 
-                placeholder="Password" 
+                className="loginFormInput password"
+                type="password"
+                placeholder="Password"
                 required
               />
             </div>
