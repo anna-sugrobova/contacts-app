@@ -70,7 +70,7 @@ export const ContactsPage: React.FC = () => {
           </button>
           <h1 className="contact-page-title">Contacts</h1>
         </header>
-        <div className="usersContainer">
+        <div className="users-container">
           {users.slice(0, 20).map((user) => {
             const { id, name, gender, location, email, phone, picture } = user;
             const { large } = picture;

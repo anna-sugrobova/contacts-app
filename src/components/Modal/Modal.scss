@@ -47,8 +47,8 @@
   border: none;
   background: none;
   padding: 0;
-}
 
-.modal-close-button:hover {
-  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.1);
+  }
 }

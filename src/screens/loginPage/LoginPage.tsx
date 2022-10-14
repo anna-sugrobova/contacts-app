@@ -22,14 +22,14 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="pageStyles">
-      <div className="loginWrapper">
-        <div className="formWrapper">
-          <form className="loginForm" onSubmit={handleSubmit}>
-            <h1 className="formHeader">Welcome</h1>
+    <div className="page-styles">
+      <div className="login-wrapper">
+        <div className="form-wrapper">
+          <form className="login-form" onSubmit={handleSubmit}>
+            <h1 className="form-header">Welcome</h1>
             <div>
               <input
-                className="loginFormInput login"
+                className="form-input login"
                 type="email"
                 placeholder="Email"
                 required
@@ -37,14 +37,14 @@ export const LoginPage: React.FC = () => {
             </div>
             <div>
               <input
-                className="loginFormInput password"
+                className="form-input password"
                 type="password"
                 placeholder="Password"
                 required
               />
             </div>
             <div>
-              <input type="submit" value="Login" className="loginBtn" />
+              <input type="submit" value="Login" className="login-button" />
             </div>
           </form>
         </div>

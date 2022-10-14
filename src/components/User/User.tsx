@@ -37,16 +37,16 @@ export const User: React.FC<UserProps> = ({
 
   return (
     <div className="wrapper">
-      <div className="userPhotoWrapper">
-        <img src={src} alt="Profile background" className="userImage" />
+      <div className="photo-wrapper">
+        <img src={src} alt="Profile background" className="user-image" />
       </div>
-      <button className="deleteUserIcon" onClick={handleDeleteUser}>
+      <button className="delete-icon" onClick={handleDeleteUser}>
         <SvgIcon>
           <ClearIcon />
         </SvgIcon>
       </button>
-      <div className="personalDesc">
-        <h3 className="userFullName">{name}</h3>
+      <div className="personal-description">
+        <h3 className="user-name">{name}</h3>
         <div className="user-data-container">
           <SvgIcon>
             <PhoneIcon />

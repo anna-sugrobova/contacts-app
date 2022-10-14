@@ -3,7 +3,7 @@
   margin-top: 17px;
 }
 
-.usersContainer {
+.users-container {
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -16,7 +16,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  background: 0;
+  background: none;
 }
 
 .MuiSvgIcon-root.arrow-icon {

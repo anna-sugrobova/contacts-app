@@ -37,50 +37,50 @@ export const EditUserModal = ({
 
   return (
     <div className="modal-content">
-      <div className="editUserModal-header">
+      <div className="edit-modal-header">
         <h3 className="modal-title">User profile</h3>
       </div>
       <div className="modal-body">
-        <label htmlFor="Name" className="modalLabel">
+        <label htmlFor="Name" className="modal-label">
           Name:
           <input
             type="text"
             id="name"
             name="name"
-            className="modalInput"
+            className="modal-input"
             value={userToEdit.name}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="Email" className="modalLabel">
+        <label htmlFor="Email" className="modal-label">
           Email:
           <input
             type="text"
             id="email"
             name="email"
-            className="modalInput"
+            className="modal-input"
             value={userToEdit.email}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="Phone" className="modalLabel">
+        <label htmlFor="Phone" className="modal-label">
           Phone:
           <input
             type="text"
             id="phone"
             name="phone"
-            className="modalInput"
+            className="modal-input"
             value={userToEdit.phone}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="Location" className="modalLabel">
+        <label htmlFor="Location" className="modal-label">
           Location:
           <input
             type="text"
             id="location"
             name="location"
-            className="modalInput"
+            className="modal-input"
             value={userToEdit.location}
             onChange={handleChange}
           />
