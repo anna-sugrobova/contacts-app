@@ -6,7 +6,8 @@ import SvgIcon from "@mui/material/SvgIcon";
 import { useCallback } from "react";
 import { deleteUser } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/store";
-import "./User.css";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import "./User.scss";
 
 interface UserProps {
   id: string;
@@ -48,15 +49,15 @@ export const User: React.FC<UserProps> = ({
         <h3 className="userFullName">{name}</h3>
         <div className="user-data-container">
           <SvgIcon>
-            <MailOutlineIcon />
-          </SvgIcon>
-          <p className="user-data-text">{email}</p>
-        </div>
-        <div className="user-data-container">
-          <SvgIcon>
             <PhoneIcon />
           </SvgIcon>
           <p className="user-data-text">{phone}</p>
+        </div>
+        <div className="user-data-container">
+          <SvgIcon>
+            <MailOutlineIcon />
+          </SvgIcon>
+          <p className="user-data-text">{email}</p>
         </div>
         <div className="user-data-container">
           <SvgIcon>
@@ -67,6 +68,9 @@ export const User: React.FC<UserProps> = ({
       </div>
       <button className="edit-user-button" onClick={() => onEdit(id)}>
         Edit
+        <SvgIcon className="edit-icon">
+          <EditOutlinedIcon />
+        </SvgIcon>
       </button>
     </div>
   );

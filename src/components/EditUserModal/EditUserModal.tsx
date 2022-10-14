@@ -3,7 +3,9 @@ import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { updateUserData } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/store";
-import "./EditUserModal.css";
+import SvgIcon from "@mui/material/SvgIcon";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import "./EditUserModal.scss";
 
 interface EditUserModalProps {
   userIdToEdit: string;
@@ -50,17 +52,6 @@ export const EditUserModal = ({
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="Gender" className="modalLabel">
-          Gender:
-          <input
-            type="text"
-            id="gender"
-            name="gender"
-            className="modalInput"
-            onChange={handleChange}
-            value={userToEdit.gender}
-          />
-        </label>
         <label htmlFor="Email" className="modalLabel">
           Email:
           <input
@@ -95,11 +86,12 @@ export const EditUserModal = ({
           />
         </label>
       </div>
-      <div className="editUserModal-footer">
-        <button onClick={saveDataHandler} className="save-user-button">
-          Save
-        </button>
-      </div>
+      <button onClick={saveDataHandler} className="save-user-button">
+        Save
+        <SvgIcon className="save-icon">
+          <SaveOutlinedIcon />
+        </SvgIcon>
+      </button>
     </div>
   );
 };
