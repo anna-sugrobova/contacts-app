@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ClearIcon from "@mui/icons-material/Clear";
-import SvgIcon from "@mui/material/SvgIcon";
+import { CloseButton } from '../Buttons/CloseButton/CloseButton';
 
 import "./Modal.scss";
 
@@ -25,17 +24,11 @@ const Modal = ({ isShowing, hide, children }: ModalProps) =>
           >
             <div className="modal">
               <div className="modal-header">
-                <button
-                  type="button"
-                  className="modal-close-button"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={hide}
-                >
-                  <SvgIcon>
-                    <ClearIcon />
-                  </SvgIcon>
-                </button>
+                  <CloseButton
+                      onClick={hide}
+                      dataDismiss='modal'
+                      ariaLabel="Close"
+                  />
               </div>
               {children}
             </div>

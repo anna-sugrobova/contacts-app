@@ -1,4 +1,3 @@
-import ClearIcon from "@mui/icons-material/Clear";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -6,7 +5,9 @@ import SvgIcon from "@mui/material/SvgIcon";
 import { useCallback } from "react";
 import { deleteUser } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/store";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { SaveEditButton } from "../Buttons/SaveEditButton/SaveEditButton";
+import { CloseButton } from '../Buttons/CloseButton/CloseButton';
+
 import "./User.scss";
 
 interface UserProps {
@@ -36,15 +37,11 @@ export const User: React.FC<UserProps> = ({
   }, [id, dispatch]);
 
   return (
-    <div className="wrapper">
+    <div className="card-wrapper">
       <div className="photo-wrapper">
         <img src={src} alt="Profile background" className="user-image" />
       </div>
-      <button className="delete-icon" onClick={handleDeleteUser}>
-        <SvgIcon>
-          <ClearIcon />
-        </SvgIcon>
-      </button>
+        <CloseButton onClick={handleDeleteUser} />
       <div className="personal-description">
         <h3 className="user-name">{name}</h3>
         <div className="user-data-container">
@@ -66,12 +63,7 @@ export const User: React.FC<UserProps> = ({
           <p className="user-data-text">{location}</p>
         </div>
       </div>
-      <button className="edit-user-button" onClick={() => onEdit(id)}>
-        Edit
-        <SvgIcon className="edit-icon">
-          <EditOutlinedIcon />
-        </SvgIcon>
-      </button>
+      <SaveEditButton onClick={() => onEdit(id)} value="Edit" />
     </div>
   );
 };

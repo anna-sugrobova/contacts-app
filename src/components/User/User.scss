@@ -1,4 +1,4 @@
-.wrapper {
+.card-wrapper {
   box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%),
     0 2px 4px -1px rgb(0 0 0 / 30%);
   padding: 25px;
@@ -7,6 +7,12 @@
   text-align: start;
   position: relative;
   background-color: #f3f3f3;
+
+  .close-button {
+    position: absolute;
+    left: 373px;
+    top: 21px;
+  }
 }
 
 .user-image {
@@ -47,49 +53,6 @@
   text-align: center;
 }
 
-.delete-icon {
-  border: none;
-  background: none;
-  padding: 0;
-  position: absolute;
-  top: 12px;
-  left: 377px;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-}
-
-.edit-user-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #87ceeb;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-  width: 100%;
-  border: none;
-  padding: 1rem;
-  outline: none;
-  box-sizing: border-box;
-  border-radius: 1.5rem / 50%;
-  transition: background-color 100ms ease-in-out,
-    transform 200ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  cursor: pointer;
-
-  &:hover {
-    background-color: #4682b4;
-    transform: scale(1.02);
-  }
-
-  &:active {
-    background-color: #4682b4;
-    transform: scale(1);
-  }
-}
-
 .user-data-container {
   display: flex;
   justify-content: flex-start;
@@ -100,8 +63,3 @@
   margin-left: 10px;
 }
 
-.MuiSvgIcon-root.edit-icon {
-  width: 17px;
-  height: 17px;
-  margin-left: 5px;
-}

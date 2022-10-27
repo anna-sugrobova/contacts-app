@@ -1,0 +1,13 @@
+.close-button {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
