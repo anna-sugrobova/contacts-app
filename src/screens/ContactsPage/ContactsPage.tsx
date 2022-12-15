@@ -13,15 +13,18 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SvgIcon from "@mui/material/SvgIcon";
 import { useNavigate } from "react-router-dom";
 import "./ContactsPage.scss";
+import {Spinner} from "../../components/Spinner/Spinner";
 
 export const ContactsPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isShowing, toggle } = useModal();
   let navigate = useNavigate();
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
-    async function getUsers() {
+    (async function() {
       try {
+        setIsFetching(true);
         const request = `${MAIN_URL}?${SEARCH_QUERY}`;
         const response = await fetch(request);
         let users = await response.json();
@@ -40,11 +43,11 @@ export const ContactsPage: React.FC = () => {
             })
           )
         );
+        setIsFetching(false);
       } catch (error) {
         console.log(error);
       }
-    }
-    getUsers();
+    })()
   }, [dispatch]);
 
   const users = useAppSelector((state) => state.contacts.users);
@@ -61,39 +64,42 @@ export const ContactsPage: React.FC = () => {
 
   return (
     <>
-      <div className="contacts-page-container">
-        <header className="contacts-page-header">
-          <button type="button" onClick={handleClick} className="back-button">
-            <SvgIcon className="arrow-icon">
-              <ArrowBackIcon />
-            </SvgIcon>
-          </button>
-          <h1 className="contact-page-title">Contacts</h1>
-        </header>
-        <div className="users-container">
-          {users.slice(0, 20).map((user) => {
-            const { id, name, gender, location, email, phone, picture } = user;
-            const { large } = picture;
+      { isFetching ? <Spinner />
+      :
+          <div className="contacts-page-container">
+            <header className="contacts-page-header">
+              <button type="button" onClick={handleClick} className="back-button">
+                <SvgIcon className="arrow-icon">
+                  <ArrowBackIcon />
+                </SvgIcon>
+              </button>
+              <h1 className="contact-page-title">Contacts</h1>
+            </header>
+            <div className="users-container">
+              {users.slice(0, 20).map((user: any) => {
+                const { id, name, gender, location, email, phone, picture } = user;
+                const { large } = picture;
 
-            return (
-              <User
-                id={id}
-                gender={gender}
-                key={id}
-                name={name}
-                src={large}
-                email={email}
-                phone={phone}
-                location={location}
-                onEdit={editHandler}
-              />
-            );
-          })}
-          <Modal isShowing={isShowing} hide={toggle}>
-            <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggle} />
-          </Modal>
-        </div>
-      </div>
+                return (
+                    <User
+                        id={id}
+                        gender={gender}
+                        key={id}
+                        name={name}
+                        src={large}
+                        email={email}
+                        phone={phone}
+                        location={location}
+                        onEdit={editHandler}
+                    />
+                );
+              })}
+              <Modal isShowing={isShowing} hide={toggle}>
+                <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggle} />
+              </Modal>
+            </div>
+          </div>
+      }
     </>
   );
 };
