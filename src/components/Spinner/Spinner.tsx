@@ -1,11 +1,9 @@
 import spinner from "../../assets/spinner.svg";
+import './Spinner.scss';
 
 export const Spinner = () => {
     return (
-        <div style={{
-            margin: "auto",
-            textAlign: "center",
-        }}>
+        <div className='spinner-wrapper'>
             <img src={spinner} alt='Loading...'/>
         </div>
     )

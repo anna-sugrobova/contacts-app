@@ -1,20 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserDataType } from "../types/userTypes";
+import uniqueId from "lodash/uniqueId";
 
 const SLICE_NAME = "users";
 
-const initialState = {
-  users: [
-    {
-      id: "",
-      name: "",
-      gender: "",
-      location: "",
-      email: "",
-      phone: "",
-      picture: { large: "" },
-    },
-  ],
+type InitialState = {
+  users: UserDataType[]
+}
+
+const initialUser = {
+      id: '',
+      name: "John Doe",
+      gender: "Male / Female",
+      location: "Planet Earth",
+      email: "example@gmail.com",
+      phone: "+0-000-000-00-00",
+      picture: { large: "https://randomuser.me/api/portraits/women/1.jpg" },
+    };
+
+const initialState: InitialState = {
+  users: Array.from({ length: 10 }, () => ({
+    ...initialUser, id: uniqueId()
+  })),
 };
 
 const usersSlice = createSlice({
@@ -22,7 +29,7 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     setUsersData: (state, { payload }: PayloadAction<UserDataType[]>) => {
-      state.users = [...payload];
+      state.users = payload;
     },
     deleteUser: (state, { payload }: PayloadAction<{ id: string }>) => {
       const newUsers = state.users.filter((user) => user.id !== payload.id);

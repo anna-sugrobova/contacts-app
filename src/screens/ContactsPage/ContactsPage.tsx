@@ -64,8 +64,7 @@ export const ContactsPage: React.FC = () => {
 
   return (
     <>
-      { isFetching ? <Spinner />
-      :
+      { isFetching && <Spinner />}
           <div className="contacts-page-container">
             <header className="contacts-page-header">
               <button type="button" onClick={handleClick} className="back-button">
@@ -99,7 +98,6 @@ export const ContactsPage: React.FC = () => {
               </Modal>
             </div>
           </div>
-      }
     </>
   );
 };

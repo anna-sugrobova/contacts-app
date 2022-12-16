@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { updateUserData } from "../../redux/userSlice";
@@ -23,7 +22,7 @@ export const EditUserModal = ({
     )
   );
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserToEdit({ ...userToEdit, [name]: value });
   };
