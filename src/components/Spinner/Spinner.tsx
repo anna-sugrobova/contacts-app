@@ -4,7 +4,7 @@ import './Spinner.scss';
 export const Spinner = () => {
     return (
         <div className='spinner-wrapper'>
-            <img src={spinner} alt='Loading...'/>
+            <img src={spinner} alt='Loading spinner...'/>
         </div>
     )
 }

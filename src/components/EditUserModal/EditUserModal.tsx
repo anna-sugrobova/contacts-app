@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { useAppSelector } from "../../redux/hooks";
-import { updateUserData } from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/store";
+import {initialUser, updateUserData} from "../../redux/userSlice";
+import { useAppDispatch } from "../../redux/hooks";
 import SvgIcon from "@mui/material/SvgIcon";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import "./EditUserModal.scss";
@@ -15,29 +15,28 @@ export const EditUserModal = ({
   userIdToEdit,
   closeModal,
 }: EditUserModalProps) => {
-  const [userToEdit, setUserToEdit] = useState(
-    useAppSelector(
-      (state) =>
-        state.contacts.users.filter((user) => user.id === userIdToEdit)[0]
-    )
-  );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const selectUserId = useAppSelector(
+      (state) =>
+          state.contacts.users.find((user) => user.id === userIdToEdit)
+  );
+  const [userToEdit, setUserToEdit] = useState(selectUserId || initialUser);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserToEdit({ ...userToEdit, [name]: value });
+    userToEdit && setUserToEdit({ ...userToEdit, [name]: value });
   };
 
   const dispatch = useAppDispatch();
 
   const saveDataHandler = () => {
-    closeModal();
     dispatch(updateUserData(userToEdit));
+    closeModal();
   };
 
   return (
     <div className="modal-content">
       <div className="edit-modal-header">
-        <h3 className="modal-title">User profile</h3>
+        <p className="modal-title">User profile</p>
       </div>
       <div className="modal-body">
         <label htmlFor="Name" className="modal-label">

@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { User } from "../../components/User/User";
 import uniqueId from "lodash/uniqueId";
 import { MAIN_URL, SEARCH_QUERY } from "../../api/api";
 import { setUsersData } from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/store";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserDataFromApiType } from "../../types/userTypes";
 import useModal from "../../hooks/useModal";
 import Modal from "../../components/Modal/Modal";
@@ -15,9 +14,9 @@ import { useNavigate } from "react-router-dom";
 import "./ContactsPage.scss";
 import {Spinner} from "../../components/Spinner/Spinner";
 
-export const ContactsPage: React.FC = () => {
+export const ContactsPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { isShowing, toggle } = useModal();
+  const { isShowing, toggleModal } = useModal();
   let navigate = useNavigate();
   const [isFetching, setIsFetching] = useState(true);
 
@@ -25,24 +24,24 @@ export const ContactsPage: React.FC = () => {
     (async function() {
       try {
         setIsFetching(true);
-        const request = `${MAIN_URL}?${SEARCH_QUERY}`;
-        const response = await fetch(request);
+        const requestUrl = `${MAIN_URL}?${SEARCH_QUERY}`;
+        const response = await fetch(requestUrl);
         let users = await response.json();
-        dispatch(
-          setUsersData(
-            users.results.map((user: UserDataFromApiType) => {
-              const { id, name, location } = user;
-              const idExists = id.name && id.value;
+        const formattedUsers = users.results.map((user: UserDataFromApiType) => {
+          const { id, name, location } = user;
+          const idExists = id.name && id.value;
+          const fullLocation = `${location.city} ${location.country} ${location.postcode}`;
+          const fullName = `${name.title} ${name.first} ${name.last}`;
+          const fullId = idExists ? `${id.name}${id.value}` : uniqueId();
 
-              return {
-                ...user,
-                id: idExists ? `${id.name}${id.value}` : uniqueId(),
-                name: `${name.title} ${name.first} ${name.last}`,
-                location: `${location.city} ${location.country} ${location.postcode}`,
-              };
-            })
-          )
-        );
+          return {
+            ...user,
+            id: fullId,
+            name: fullName,
+            location: fullLocation,
+          };
+        })
+        dispatch(setUsersData(formattedUsers));
         setIsFetching(false);
       } catch (error) {
         console.log(error);
@@ -54,20 +53,23 @@ export const ContactsPage: React.FC = () => {
   const [userIdToEdit, setUserIdToEdit] = useState("");
 
   const editHandler = (id: string) => {
-    toggle();
+    toggleModal();
     setUserIdToEdit(id);
   };
 
-  const handleClick = () => {
+  const handleBackButtonClick = () => {
     navigate("/home");
   };
+
+  const countOfUsersToRender = 20;
+  const usersToRender = users.slice(0, countOfUsersToRender);
 
   return (
     <>
       { isFetching && <Spinner />}
           <div className="contacts-page-container">
             <header className="contacts-page-header">
-              <button type="button" onClick={handleClick} className="back-button">
+              <button type="button" onClick={handleBackButtonClick} className="back-button">
                 <SvgIcon className="arrow-icon">
                   <ArrowBackIcon />
                 </SvgIcon>
@@ -75,9 +77,8 @@ export const ContactsPage: React.FC = () => {
               <h1 className="contact-page-title">Contacts</h1>
             </header>
             <div className="users-container">
-              {users.slice(0, 20).map((user: any) => {
-                const { id, name, gender, location, email, phone, picture } = user;
-                const { large } = picture;
+              {usersToRender.map((user: any) => {
+                const { id, name, gender, location, email, phone, picture: { large } } = user;
 
                 return (
                     <User
@@ -93,8 +94,8 @@ export const ContactsPage: React.FC = () => {
                     />
                 );
               })}
-              <Modal isShowing={isShowing} hide={toggle}>
-                <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggle} />
+              <Modal isShowing={isShowing} hide={toggleModal}>
+                <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} />
               </Modal>
             </div>
           </div>

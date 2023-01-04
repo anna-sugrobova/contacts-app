@@ -1,13 +1,12 @@
+import { useCallback, FC } from "react";
+import { deleteUser } from "../../redux/userSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { SaveEditButton } from "../Buttons/SaveEditButton/SaveEditButton";
+import { CloseButton } from '../Buttons/CloseButton/CloseButton';
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SvgIcon from "@mui/material/SvgIcon";
-import { useCallback } from "react";
-import { deleteUser } from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/store";
-import { SaveEditButton } from "../Buttons/SaveEditButton/SaveEditButton";
-import { CloseButton } from '../Buttons/CloseButton/CloseButton';
-
 import "./User.scss";
 
 interface UserProps {
@@ -21,7 +20,7 @@ interface UserProps {
   onEdit: (id: string) => void;
 }
 
-export const User: React.FC<UserProps> = ({
+export const User: FC<UserProps> = ({
   id,
   src,
   name,
@@ -43,7 +42,7 @@ export const User: React.FC<UserProps> = ({
       </div>
         <CloseButton onClick={handleDeleteUser} />
       <div className="personal-description">
-        <h3 className="user-name">{name}</h3>
+        <p className="user-name">{name}</p>
         <div className="user-data-container">
           <SvgIcon>
             <PhoneIcon />

@@ -1,11 +1,13 @@
+import { SyntheticEvent, FC } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import background from "../../assets/background.jpg";
 import "./LoginPage.scss";
 
-export const LoginPage: React.FC = () => {
+export const LoginPage: FC = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     try {
       axios({
@@ -22,8 +24,9 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="page-styles">
+    <div className="page">
       <div className="login-wrapper">
+        <img src={background} alt="Login form background" />
         <div className="form-wrapper">
           <form className="login-form" onSubmit={handleSubmit}>
             <h1 className="form-header">Welcome</h1>

@@ -1,4 +1,4 @@
-.page-styles {
+.page {
   color: #6a6f8c;
   background: #c8c8c8;
   height: 100vh;
@@ -33,10 +33,12 @@ a {
   transform: translate(-50%, -50%);
   max-width: 525px;
   min-height: 670px;
-  background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg)
-    no-repeat center;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+  img {
+    background: no-repeat center;
+  }
 }
 
 .form-wrapper {

@@ -8,7 +8,7 @@ type InitialState = {
   users: UserDataType[]
 }
 
-const initialUser = {
+export const initialUser = {
       id: '',
       name: "John Doe",
       gender: "Male / Female",
