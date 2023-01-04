@@ -1,13 +1,13 @@
-import { useCallback, FC } from "react";
-import { deleteUser } from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { SaveEditButton } from "../Buttons/SaveEditButton/SaveEditButton";
+import { FC, useCallback } from 'react';
+import { deleteUser } from '../../redux/userSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import { Button } from '../Buttons/Button/Button';
 import { CloseButton } from '../Buttons/CloseButton/CloseButton';
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import PhoneIcon from "@mui/icons-material/Phone";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import SvgIcon from "@mui/material/SvgIcon";
-import "./User.scss";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import SvgIcon from '@mui/material/SvgIcon';
+import './User.scss';
 
 interface UserProps {
   id: string;
@@ -20,15 +20,7 @@ interface UserProps {
   onEdit: (id: string) => void;
 }
 
-export const User: FC<UserProps> = ({
-  id,
-  src,
-  name,
-  location,
-  email,
-  phone,
-  onEdit,
-}) => {
+export const User: FC<UserProps> = ({ id, src, name, location, email, phone, onEdit }) => {
   const dispatch = useAppDispatch();
 
   const handleDeleteUser = useCallback(() => {
@@ -40,7 +32,7 @@ export const User: FC<UserProps> = ({
       <div className="photo-wrapper">
         <img src={src} alt="Profile background" className="user-image" />
       </div>
-        <CloseButton onClick={handleDeleteUser} />
+      <CloseButton onClick={handleDeleteUser} />
       <div className="personal-description">
         <p className="user-name">{name}</p>
         <div className="user-data-container">
@@ -62,7 +54,9 @@ export const User: FC<UserProps> = ({
           <p className="user-data-text">{location}</p>
         </div>
       </div>
-      <SaveEditButton onClick={() => onEdit(id)} value="Edit" />
+      <Button onClick={() => onEdit(id)} value="Edit" isIcon>
+        Edit
+      </Button>
     </div>
   );
 };

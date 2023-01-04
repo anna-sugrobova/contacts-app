@@ -1,24 +1,17 @@
-import { useState, ChangeEvent } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import {initialUser, updateUserData} from "../../redux/userSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import SvgIcon from "@mui/material/SvgIcon";
-import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
-import "./EditUserModal.scss";
+import { ChangeEvent, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { initialUser, updateUserData } from '../../redux/userSlice';
+import './EditUserModal.scss';
+import { Button } from '../Buttons/Button/Button';
 
 interface EditUserModalProps {
   userIdToEdit: string;
   closeModal: () => void;
 }
 
-export const EditUserModal = ({
-  userIdToEdit,
-  closeModal,
-}: EditUserModalProps) => {
-
-  const selectUserId = useAppSelector(
-      (state) =>
-          state.contacts.users.find((user) => user.id === userIdToEdit)
+export const EditUserModal = ({ userIdToEdit, closeModal }: EditUserModalProps) => {
+  const selectUserId = useAppSelector((state) =>
+    state.contacts.users.find((user) => user.id === userIdToEdit),
   );
   const [userToEdit, setUserToEdit] = useState(selectUserId || initialUser);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -84,12 +77,9 @@ export const EditUserModal = ({
           />
         </label>
       </div>
-      <button onClick={saveDataHandler} className="save-user-button">
+      <Button onClick={saveDataHandler} value="Save" isIcon>
         Save
-        <SvgIcon className="save-icon">
-          <SaveOutlinedIcon />
-        </SvgIcon>
-      </button>
+      </Button>
     </div>
   );
 };

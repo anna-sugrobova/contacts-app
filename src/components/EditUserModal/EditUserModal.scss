@@ -45,29 +45,6 @@
   width: 100%;
 }
 
-.save-user-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-  border: none;
-  padding: 15px 20px;
-  background-color: #87ceeb;
-  border-radius: 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: background-color 100ms ease-in-out,
-  transform 200ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
-
-  &:hover {
-    background-color: #4682b4;
-    transform: scale(1.02);
-  }
-}
-
 .MuiSvgIcon-root.save-icon {
   width: 17px;
   height: 17px;
