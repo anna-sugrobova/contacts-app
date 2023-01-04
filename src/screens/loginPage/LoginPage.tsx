@@ -34,7 +34,7 @@ export const LoginPage: FC = () => {
     <>
       <div className="page">
         <div className="login-wrapper">
-          <img src={background} alt="Login form background" />
+          <img src={background} alt="Login form background" className="backgroundImage" />
           <div className="form-wrapper">
             <form className="login-form" onSubmit={handleSubmit}>
               <h1 className="form-header">Welcome</h1>
@@ -57,7 +57,7 @@ export const LoginPage: FC = () => {
                 />
               </div>
               <div>
-                <input type="submit" value="Login" className="login-button" onFocus={hideError} />
+                <input type="submit" value="Login" className="login-button" />
                 {error && (
                   <div className="login-error">Login failed. Invalid email or password.</div>
                 )}
