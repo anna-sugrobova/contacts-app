@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import background from '../../assets/background.jpg';
 import './LoginPage.scss';
+import { Button } from '../../components/Buttons/Button/Button';
 
 export const LoginPage: FC = () => {
   const [error, setError] = useState(false);
@@ -57,7 +58,9 @@ export const LoginPage: FC = () => {
                 />
               </div>
               <div>
-                <input type="submit" value="Login" className="login-button" />
+                <Button type="submit" value="Login" isIcon={false}>
+                  Login
+                </Button>
                 {error && (
                   <div className="login-error">Login failed. Invalid email or password.</div>
                 )}
