@@ -1,6 +1,5 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import background from '../../assets/background.jpg';
 import './LoginPage.scss';
 import { Button } from '../../components/Buttons/Button/Button';
@@ -10,25 +9,10 @@ export const LoginPage: FC = () => {
   const navigate = useNavigate();
 
   const hideError = () => setError(false);
-  const handleError = (error: Error) => {
-    console.log(error);
-    setError(true);
-  };
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    axios({
-      method: 'GET',
-      url: 'http://localhost:3000/login',
-    })
-      .then((response) => {
-        if (response.data.success) {
-          navigate('/contacts');
-        }
-      })
-      .catch((error) => {
-        handleError(error);
-      });
+    navigate('/contacts');
   };
 
   return (
