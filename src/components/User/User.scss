@@ -13,6 +13,11 @@
     left: 89%;
     top: 5%;
   }
+
+  &:hover {
+    background-color: #e8e7e7;
+    transition: background-color 0.3s;
+  }
 }
 
 .user-image {
@@ -59,6 +64,18 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  &:hover {
+    svg {
+      fill: #4682b4;
+      transition: all 0.3s;
+    }
+
+    .user-data-text {
+      color: #5a5a5a;
+      transition: all 0.3s;
+    }
+  }
 }
 
 .user-data-text {

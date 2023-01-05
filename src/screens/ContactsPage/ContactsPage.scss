@@ -17,6 +17,13 @@
   outline: none;
   cursor: pointer;
   background: none;
+
+  &:hover {
+    svg {
+      fill: #4682b4;
+      transition: fill 0.3s;
+    }
+  }
 }
 
 .MuiSvgIcon-root.arrow-icon {
@@ -26,6 +33,7 @@
 
 .contact-page-title {
   text-align: center;
+  cursor: default;
 }
 
 .contacts-page-container {
