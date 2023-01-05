@@ -109,7 +109,7 @@ export const ContactsPage: FC = () => {
                 />
               );
             })}
-            <Modal isShowing={isShowing} hide={toggleModal}>
+            <Modal isShowing={isShowing} hide={toggleModal} onClick={toggleModal}>
               <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} />
             </Modal>
           </div>

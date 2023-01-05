@@ -1,22 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { CloseButton } from '../Buttons/CloseButton/CloseButton';
 
-import "./Modal.scss";
+import './Modal.scss';
 
 type ModalProps = {
   isShowing: boolean;
   hide: () => void;
   children: JSX.Element;
+  onClick?: () => void;
 };
 
-const Modal = ({ isShowing, hide, children }: ModalProps) =>
+const Modal = ({ isShowing, hide, children, onClick }: ModalProps) =>
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
           <div className="modal-overlay" />
           <div
             className="modal-wrapper"
+            onClick={onClick}
             aria-modal
             aria-hidden
             tabIndex={-1}
@@ -24,17 +26,13 @@ const Modal = ({ isShowing, hide, children }: ModalProps) =>
           >
             <div className="modal">
               <div className="modal-header">
-                  <CloseButton
-                      onClick={hide}
-                      dataDismiss='modal'
-                      ariaLabel="Close"
-                  />
+                <CloseButton onClick={hide} dataDismiss="modal" ariaLabel="Close" />
               </div>
               {children}
             </div>
           </div>
         </React.Fragment>,
-        document.body
+        document.body,
       )
     : null;
 
