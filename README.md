@@ -2,6 +2,8 @@
 
 It's a small app to view and edit contacts, built with React, Redux, TypeScript
 
+[Check the Demo](https://contacts-app-sigma-one.vercel.app/contacts)
+
 ### Usage
 
 You can login with any credentials. Then you'll see nice cards with random users. You can edit any user data, save
@@ -29,10 +31,4 @@ yarn
 
 ```
 npm run start
-```
-
-* in a new terminal start json server on localhost:3001
-
-```
-npm run db
 ```
