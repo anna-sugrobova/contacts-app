@@ -4,15 +4,17 @@ import uniqueId from 'lodash/uniqueId';
 import { MAIN_URL, SEARCH_QUERY } from '../../api/api';
 import { setUsersData } from '../../redux/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useNavigate } from 'react-router-dom';
+import { Spinner } from '../../components/Spinner/Spinner';
 import { UserDataFromApiType } from '../../types/userTypes';
 import useModal from '../../hooks/useModal';
 import Modal from '../../components/Modal/Modal';
 import { EditUserModal } from '../../components/EditUserModal/EditUserModal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useNavigate } from 'react-router-dom';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { NewUserModal } from '../../components/NewUserModal/NewUserModal';
 import './ContactsPage.scss';
-import { Spinner } from '../../components/Spinner/Spinner';
 
 export const ContactsPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -53,18 +55,22 @@ export const ContactsPage: FC = () => {
 
   const users = useAppSelector((state) => state.contacts.users);
   const [userIdToEdit, setUserIdToEdit] = useState('');
+  const [modalType, setModalType] = useState('edit');
 
   const editHandler = (id: string) => {
-    toggleModal();
+    setModalType('edit');
     setUserIdToEdit(id);
+    toggleModal();
   };
 
   const handleBackButtonClick = () => {
     navigate('/');
   };
 
-  const countOfUsersToRender = 20;
-  const usersToRender = users.slice(0, countOfUsersToRender);
+  const handleAddNewContact = () => {
+    setModalType('add');
+    toggleModal();
+  };
 
   return (
     <>
@@ -76,15 +82,22 @@ export const ContactsPage: FC = () => {
       ) : (
         <div className="contacts-page-container">
           <header className="contacts-page-header">
-            <button type="button" onClick={handleBackButtonClick} className="back-button">
-              <SvgIcon className="arrow-icon">
-                <ArrowBackIcon />
-              </SvgIcon>
-            </button>
+            <div className="buttons-wrapper">
+              <button type="button" onClick={handleBackButtonClick} className="back-button">
+                <SvgIcon className="arrow-icon">
+                  <ArrowBackIcon />
+                </SvgIcon>
+              </button>
+              <button type="button" onClick={handleAddNewContact} className="add-person-button">
+                <SvgIcon>
+                  <PersonAddIcon />
+                </SvgIcon>
+              </button>
+            </div>
             <h1 className="contact-page-title">Contacts</h1>
           </header>
           <div className="users-container">
-            {usersToRender.map((user: any) => {
+            {users.map((user: any) => {
               const {
                 id,
                 name,
@@ -110,7 +123,11 @@ export const ContactsPage: FC = () => {
               );
             })}
             <Modal isShowing={isShowing} hide={toggleModal} onClick={toggleModal}>
-              <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} />
+              {modalType === 'edit' ? (
+                <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} />
+              ) : (
+                <NewUserModal closeModal={toggleModal} />
+              )}
             </Modal>
           </div>
         </div>

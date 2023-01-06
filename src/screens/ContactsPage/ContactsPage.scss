@@ -31,6 +31,24 @@
   height: 25px;
 }
 
+.add-person-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    svg {
+      fill: #4682b4;
+      transition: fill 0.3s;
+    }
+  }
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .contact-page-title {
   text-align: center;
   cursor: default;

@@ -1,26 +1,28 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserDataType } from "../types/userTypes";
-import uniqueId from "lodash/uniqueId";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserDataType } from '../types/userTypes';
+import uniqueId from 'lodash/uniqueId';
+import avatar from '../assets/avatar.jpeg';
 
-const SLICE_NAME = "users";
+const SLICE_NAME = 'users';
 
 type InitialState = {
-  users: UserDataType[]
-}
+  users: UserDataType[];
+};
 
 export const initialUser = {
-      id: '',
-      name: "John Doe",
-      gender: "Male / Female",
-      location: "Planet Earth",
-      email: "example@gmail.com",
-      phone: "+0-000-000-00-00",
-      picture: { large: "https://randomuser.me/api/portraits/women/1.jpg" },
-    };
+  id: '',
+  name: 'John Doe',
+  gender: 'Male / Female',
+  location: 'Planet Earth',
+  email: 'example@gmail.com',
+  phone: '+0-000-000-00-00',
+  picture: { large: 'https://randomuser.me/api/portraits/women/1.jpg' },
+};
 
 const initialState: InitialState = {
   users: Array.from({ length: 10 }, () => ({
-    ...initialUser, id: uniqueId()
+    ...initialUser,
+    id: uniqueId(),
   })),
 };
 
@@ -33,7 +35,6 @@ const usersSlice = createSlice({
     },
     deleteUser: (state, { payload }: PayloadAction<{ id: string }>) => {
       const newUsers = state.users.filter((user) => user.id !== payload.id);
-
       return { users: newUsers };
     },
     updateUserData: (state, { payload: editedUser }) => {
@@ -47,9 +48,12 @@ const usersSlice = createSlice({
         }),
       };
     },
+    addNewUser: (state, { payload: newUser }) => {
+      state.users.push({ ...newUser, id: uniqueId(), picture: { large: avatar } });
+    },
   },
 });
 
-export const { setUsersData, deleteUser, updateUserData } = usersSlice.actions;
+export const { setUsersData, deleteUser, updateUserData, addNewUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

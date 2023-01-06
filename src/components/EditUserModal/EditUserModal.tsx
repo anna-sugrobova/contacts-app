@@ -10,10 +10,10 @@ interface EditUserModalProps {
 }
 
 export const EditUserModal = ({ userIdToEdit, closeModal }: EditUserModalProps) => {
-  const selectUserId = useAppSelector((state) =>
+  const selectedUser = useAppSelector((state) =>
     state.contacts.users.find((user) => user.id === userIdToEdit),
   );
-  const [userToEdit, setUserToEdit] = useState(selectUserId || initialUser);
+  const [userToEdit, setUserToEdit] = useState(selectedUser || initialUser);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     userToEdit && setUserToEdit({ ...userToEdit, [name]: value });
