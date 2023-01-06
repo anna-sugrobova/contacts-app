@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserDataType } from '../types/userTypes';
 import uniqueId from 'lodash/uniqueId';
-import avatar from '../assets/avatar.jpeg';
 
 const SLICE_NAME = 'users';
 
@@ -49,7 +48,7 @@ const usersSlice = createSlice({
       };
     },
     addNewUser: (state, { payload: newUser }) => {
-      state.users.push({ ...newUser, id: uniqueId(), picture: { large: avatar } });
+      state.users.push({ ...newUser, id: uniqueId() });
     },
   },
 });
