@@ -23,7 +23,7 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
   });
 
   const [file, setFile] = useState<File | null>(null);
-  const [fileDataURL, setFileDataURL] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState<ArrayBuffer | string | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -59,9 +59,11 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
     if (file) {
       fileReader = new FileReader();
       fileReader.onload = (e) => {
-        const { result } = e.target;
-        if (result && !isCancel) {
-          setFileDataURL(result);
+        if (e.target) {
+          const { result } = e.target;
+          if (result && !isCancel) {
+            setFileDataURL(result);
+          }
         }
       };
       fileReader.readAsDataURL(file);
@@ -82,7 +84,9 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
       <div className="modal-body">
         <form onSubmit={saveDataHandler}>
           {fileDataURL ? (
-            <div className="img-preview-wrapper">{<img src={fileDataURL} alt="preview" />}</div>
+            <div className="img-preview-wrapper">
+              {<img src={String(fileDataURL)} alt="preview" />}
+            </div>
           ) : (
             <label htmlFor="file" className="modal-label upload">
               <img src={upload} alt="Upload avatar" className="upload-image" />
