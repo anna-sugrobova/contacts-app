@@ -6,14 +6,13 @@ import { setUsersData } from '../../redux/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
-import { UserDataFromApiType } from '../../types/userTypes';
+import { UserActions, UserDataFromApiType } from '../../types/userTypes';
 import useModal from '../../hooks/useModal';
 import Modal from '../../components/Modal/Modal';
-import { EditUserModal } from '../../components/EditUserModal/EditUserModal';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SvgIcon from '@mui/material/SvgIcon';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { NewUserModal } from '../../components/NewUserModal/NewUserModal';
+import { UserModal } from '../../components/UserModal/UserModal';
 import './ContactsPage.scss';
 
 export const ContactsPage: FC = () => {
@@ -55,10 +54,10 @@ export const ContactsPage: FC = () => {
 
   const users = useAppSelector((state) => state.contacts.users);
   const [userIdToEdit, setUserIdToEdit] = useState('');
-  const [modalType, setModalType] = useState('edit');
+  const [modalType, setModalType] = useState(UserActions.Edit);
 
   const editHandler = (id: string) => {
-    setModalType('edit');
+    setModalType(UserActions.Edit);
     setUserIdToEdit(id);
     toggleModal();
   };
@@ -68,7 +67,7 @@ export const ContactsPage: FC = () => {
   };
 
   const handleAddNewContact = () => {
-    setModalType('add');
+    setModalType(UserActions.Add);
     toggleModal();
   };
 
@@ -123,11 +122,7 @@ export const ContactsPage: FC = () => {
               );
             })}
             <Modal isShowing={isShowing} hide={toggleModal} onClick={toggleModal}>
-              {modalType === 'edit' ? (
-                <EditUserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} />
-              ) : (
-                <NewUserModal closeModal={toggleModal} />
-              )}
+              <UserModal userIdToEdit={userIdToEdit} closeModal={toggleModal} type={modalType} />
             </Modal>
           </div>
         </div>

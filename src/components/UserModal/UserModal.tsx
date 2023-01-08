@@ -1,47 +1,52 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks';
-import { addNewUser } from '../../redux/userSlice';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addNewUser, updateUserData } from '../../redux/userSlice';
+import './UserModal.scss';
 import { Button } from '../Buttons/Button/Button';
 import upload from '../../assets/upload.png';
-import '../EditUserModal/EditUserModal.scss';
+import { UserActions } from '../../types/userTypes';
 
-interface NewUserModalProps {
+const saveDataActions = {
+  [UserActions.Edit]: updateUserData,
+  [UserActions.Add]: addNewUser,
+};
+
+interface UserModalProps {
+  userIdToEdit?: string;
   closeModal: () => void;
+  type: UserActions;
 }
 
-export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
+const emptyUserData = {
+  name: '',
+  email: '',
+  phone: '',
+  location: '',
+  picture: {
+    large: '',
+  },
+};
+
+const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) => {
   const dispatch = useAppDispatch();
 
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    location: '',
-    picture: {
-      large: '',
-    },
-  });
+  const selectedUser = useAppSelector((state) =>
+    state.contacts.users.find((user) => user.id === userIdToEdit),
+  );
 
-  const [file, setFile] = useState<File | null>(null);
-  const [fileDataURL, setFileDataURL] = useState<ArrayBuffer | string | null>(null);
+  const [userData, setUserData] = useState(
+    type === UserActions.Edit ? selectedUser || emptyUserData : emptyUserData,
+  );
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setNewUser({ ...newUser, [name]: value });
+    setUserData({ ...userData, [name]: value });
   };
 
-  const saveDataHandler = () => {
-    dispatch(
-      addNewUser({
-        ...newUser,
-        picture: {
-          large: fileDataURL,
-        },
-      }),
-    );
-    closeModal();
-  };
-  const imageMimeType = /image\/(png|jpg|jpeg)/i;
+  const [file, setFile] = useState<File | null>(null);
+  const [fileDataURL, setFileDataURL] = useState<ArrayBuffer | string | null>(null);
 
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -63,43 +68,59 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
           const { result } = e.target;
           if (result && !isCancel) {
             setFileDataURL(result);
+            setUserData({ ...userData, picture: { large: String(result) } });
           }
         }
       };
       fileReader.readAsDataURL(file);
     }
+
     return () => {
       isCancel = true;
       if (fileReader && fileReader.readyState === 1) {
         fileReader.abort();
       }
     };
-  }, [file]);
+  }, [file, userData]);
+
+  const saveDataHandler = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    dispatch(saveDataActions[type]({ ...userData }));
+
+    closeModal();
+  };
+
+  const modalTitle = {
+    [UserActions.Edit]: 'User profile',
+    [UserActions.Add]: 'New User',
+  };
 
   return (
     <div className="modal-content">
       <div className="edit-modal-header">
-        <p className="modal-title">New user</p>
+        <p className="modal-title">{modalTitle[type]}</p>
       </div>
       <div className="modal-body">
         <form onSubmit={saveDataHandler}>
-          {fileDataURL ? (
-            <div className="img-preview-wrapper">
-              {<img src={String(fileDataURL)} alt="preview" />}
-            </div>
-          ) : (
-            <label htmlFor="file" className="modal-label upload">
-              <img src={upload} alt="Upload avatar" className="upload-image" />
-              <input
-                type="file"
-                id="file"
-                name="image"
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={handleUploadFile}
-              />
-            </label>
-          )}
+          {type === UserActions.Add &&
+            (fileDataURL ? (
+              <div className="img-preview-wrapper">
+                {<img src={String(fileDataURL)} alt="preview" />}
+              </div>
+            ) : (
+              <label htmlFor="file" className="modal-label upload">
+                <img src={upload} alt="Upload avatar" className="upload-image" />
+                <input
+                  type="file"
+                  id="file"
+                  name="image"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={handleUploadFile}
+                />
+              </label>
+            ))}
           <label htmlFor="Name" className="modal-label">
             Name:
             <input
@@ -107,21 +128,19 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
               id="name"
               name="name"
               className="modal-input"
-              value={newUser.name}
+              value={userData.name}
               onChange={handleChange}
-              required
             />
           </label>
           <label htmlFor="Email" className="modal-label">
             Email:
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               className="modal-input"
-              value={newUser.email}
+              value={userData.email}
               onChange={handleChange}
-              required
             />
           </label>
           <label htmlFor="Phone" className="modal-label">
@@ -131,9 +150,8 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
               id="phone"
               name="phone"
               className="modal-input"
-              value={newUser.phone}
+              value={userData.phone}
               onChange={handleChange}
-              required
             />
           </label>
           <label htmlFor="Location" className="modal-label">
@@ -143,9 +161,8 @@ export const NewUserModal = ({ closeModal }: NewUserModalProps) => {
               id="location"
               name="location"
               className="modal-input"
-              value={newUser.location}
+              value={userData.location}
               onChange={handleChange}
-              required
             />
           </label>
           <Button type="submit" value="Save" isIcon>

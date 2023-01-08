@@ -17,3 +17,8 @@ export type UserDataFromApiType = {
   email: string;
   phone: string;
 };
+
+export enum UserActions {
+  Edit = 'edit',
+  Add = 'add',
+}
