@@ -16,6 +16,7 @@
 
 .edit-modal-header {
   text-align: center;
+  margin-bottom: 25px;
 }
 
 .modal-title {
@@ -28,17 +29,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 10px;
+
+  .button {
+    margin-top: 26px;
+  }
 }
 
 .modal-label {
   display: flex;
   align-items: center;
   font-weight: 600;
-  margin-bottom: 15px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
 
   &.upload {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 }
 

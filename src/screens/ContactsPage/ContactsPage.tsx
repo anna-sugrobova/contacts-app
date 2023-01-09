@@ -82,12 +82,12 @@ export const ContactsPage: FC = () => {
         <div className="contacts-page-container">
           <header className="contacts-page-header">
             <div className="buttons-wrapper">
-              <button type="button" onClick={handleBackButtonClick} className="back-button">
+              <button type="button" onClick={handleBackButtonClick} className="header-button">
                 <SvgIcon className="arrow-icon">
                   <ArrowBackIcon />
                 </SvgIcon>
               </button>
-              <button type="button" onClick={handleAddNewContact} className="add-person-button">
+              <button type="button" onClick={handleAddNewContact} className="header-button">
                 <SvgIcon>
                   <PersonAddIcon />
                 </SvgIcon>

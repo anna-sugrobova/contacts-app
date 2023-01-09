@@ -9,5 +9,13 @@
 
   &:hover {
     transform: scale(1.1);
+    transition: all 0.3s;
+
+    &:hover {
+      svg {
+        fill: #4682b4;
+        transition: all 0.3s;
+      }
+    }
   }
 }
