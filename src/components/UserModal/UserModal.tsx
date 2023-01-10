@@ -92,8 +92,8 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
   };
 
   const modalTitle = {
-    [UserActions.Edit]: 'User profile',
-    [UserActions.Add]: 'New User',
+    [UserActions.Edit]: 'Contact profile',
+    [UserActions.Add]: 'New Contact',
   };
 
   return (
@@ -130,17 +130,19 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               className="modal-input"
               value={userData.name}
               onChange={handleChange}
+              required
             />
           </label>
           <label htmlFor="Email" className="modal-label">
             Email:
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               className="modal-input"
               value={userData.email}
               onChange={handleChange}
+              required
             />
           </label>
           <label htmlFor="Phone" className="modal-label">
@@ -152,6 +154,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               className="modal-input"
               value={userData.phone}
               onChange={handleChange}
+              required
             />
           </label>
           <label htmlFor="Location" className="modal-label">
@@ -163,6 +166,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               className="modal-input"
               value={userData.location}
               onChange={handleChange}
+              required
             />
           </label>
           <Button type="submit" value="Save" isIcon>
