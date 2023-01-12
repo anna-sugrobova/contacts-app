@@ -6,8 +6,17 @@ It's a small app to view and edit contacts, built with React, Redux, TypeScript
 
 ### Usage
 
-You can login with any credentials. Then you'll see nice cards with random users. You can edit any user data, save
-changes, delete any user.
+You can login with any credentials. Then you'll see nice cards with random users.
+
+The application allows to: 
+
+- **edit** any existing user data
+- **save** changed user
+- **delete** any user
+- **add** a new user with any personal data
+- **upload** an image from your computer to add a nice avatar to your new user
+
+You can create new users **with** or **without** uploading an avatar. 
 
 ### Stack
 
