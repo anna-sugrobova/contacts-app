@@ -1,23 +1,23 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addNewUser, updateUserData } from '../../redux/userSlice';
-import './UserModal.scss';
+import { addNewContact, updateContactData } from '../../redux/contactsSlice';
+import './ContactModal.scss';
 import { Button } from '../Buttons/Button/Button';
 import upload from '../../assets/upload.png';
-import { UserActions } from '../../types/userTypes';
+import { ContactActions } from '../../types/contactTypes';
 
 const saveDataActions = {
-  [UserActions.Edit]: updateUserData,
-  [UserActions.Add]: addNewUser,
+  [ContactActions.Edit]: updateContactData,
+  [ContactActions.Add]: addNewContact,
 };
 
-interface UserModalProps {
-  userIdToEdit?: string;
+interface ContactModalProps {
+  contactIdToEdit?: string;
   closeModal: () => void;
-  type: UserActions;
+  type: ContactActions;
 }
 
-const emptyUserData = {
+const emptyContactData = {
   name: '',
   email: '',
   phone: '',
@@ -29,20 +29,20 @@ const emptyUserData = {
 
 const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
-export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) => {
+export const ContactModal = ({ contactIdToEdit, closeModal, type }: ContactModalProps) => {
   const dispatch = useAppDispatch();
 
-  const selectedUser = useAppSelector((state) =>
-    state.contacts.users.find((user) => user.id === userIdToEdit),
+  const selectedContact = useAppSelector((state) =>
+    state.users.contacts.find((contact) => contact.id === contactIdToEdit),
   );
 
-  const [userData, setUserData] = useState(
-    type === UserActions.Edit ? selectedUser || emptyUserData : emptyUserData,
+  const [contactData, setContactData] = useState(
+    type === ContactActions.Edit ? selectedContact || emptyContactData : emptyContactData,
   );
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value });
+    setContactData({ ...contactData, [name]: value });
   };
 
   const [file, setFile] = useState<File | null>(null);
@@ -68,7 +68,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
           const { result } = e.target;
           if (result && !isCancel) {
             setFileDataURL(result);
-            setUserData({ ...userData, picture: { large: String(result) } });
+            setContactData({ ...contactData, picture: { large: String(result) } });
           }
         }
       };
@@ -81,19 +81,19 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
         fileReader.abort();
       }
     };
-  }, [file, userData]);
+  }, [file, contactData]);
 
   const saveDataHandler = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    dispatch(saveDataActions[type]({ ...userData }));
+    dispatch(saveDataActions[type]({ ...contactData }));
 
     closeModal();
   };
 
   const modalTitle = {
-    [UserActions.Edit]: 'Contact profile',
-    [UserActions.Add]: 'New Contact',
+    [ContactActions.Edit]: 'Contact profile',
+    [ContactActions.Add]: 'New Contact',
   };
 
   return (
@@ -103,7 +103,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
       </div>
       <div className="modal-body">
         <form onSubmit={saveDataHandler}>
-          {type === UserActions.Add &&
+          {type === ContactActions.Add &&
             (fileDataURL ? (
               <div className="img-preview-wrapper">
                 {<img src={String(fileDataURL)} alt="preview" />}
@@ -128,7 +128,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               id="name"
               name="name"
               className="modal-input"
-              value={userData.name}
+              value={contactData.name}
               onChange={handleChange}
               required
             />
@@ -140,7 +140,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               id="email"
               name="email"
               className="modal-input"
-              value={userData.email}
+              value={contactData.email}
               onChange={handleChange}
               required
             />
@@ -152,7 +152,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               id="phone"
               name="phone"
               className="modal-input"
-              value={userData.phone}
+              value={contactData.phone}
               onChange={handleChange}
               required
             />
@@ -164,7 +164,7 @@ export const UserModal = ({ userIdToEdit, closeModal, type }: UserModalProps) =>
               id="location"
               name="location"
               className="modal-input"
-              value={userData.location}
+              value={contactData.location}
               onChange={handleChange}
               required
             />

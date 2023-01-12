@@ -1,4 +1,4 @@
-export type UserDataType = {
+export type ContactDataType = {
   id: string;
   name: string;
   gender: string;
@@ -8,7 +8,7 @@ export type UserDataType = {
   phone: string;
 };
 
-export type UserDataFromApiType = {
+export type ContactDataFromApiType = {
   id: { name: string; value: string };
   name: { title: string; first: string; last: string };
   gender: string;
@@ -18,7 +18,7 @@ export type UserDataFromApiType = {
   phone: string;
 };
 
-export enum UserActions {
+export enum ContactActions {
   Edit = 'edit',
   Add = 'add',
 }

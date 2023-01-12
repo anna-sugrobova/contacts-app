@@ -20,7 +20,7 @@
   }
 }
 
-.user-image {
+.contact-image {
   object-fit: cover;
   border-radius: 50%;
   width: 90px;
@@ -55,13 +55,13 @@
   margin-bottom: 10px;
 }
 
-.user-name {
+.contact-name {
   text-align: center;
   font-size: 18px;
   font-weight: 700;
 }
 
-.user-data-container {
+.contact-data-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -72,14 +72,13 @@
       transition: all 0.3s;
     }
 
-    .user-data-text {
+    .contact-data-text {
       color: #5a5a5a;
       transition: all 0.3s;
     }
   }
 }
 
-.user-data-text {
+.contact-data-text {
   margin-left: 10px;
 }
-
