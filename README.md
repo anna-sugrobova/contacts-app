@@ -2,7 +2,7 @@
 
 It's a small app to view and edit contacts, built with React, Redux, TypeScript
 
-![Contacts App DEMO](https://user-images.githubusercontent.com/65123309/212162896-f326a163-a1c4-4c9a-b592-6ec7515e6102.gif)
+![Contacts App preview](https://user-images.githubusercontent.com/65123309/212175556-9f200138-7778-426b-94d2-00b59a9291db.gif)
 
 [Check the Demo](https://contacts-app-sigma-one.vercel.app/contacts)
 
