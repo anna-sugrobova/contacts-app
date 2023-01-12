@@ -81,19 +81,19 @@ export const ContactsPage: FC = () => {
       ) : (
         <div className="contacts-page-container">
           <header className="contacts-page-header">
-            <div className="buttons-wrapper">
+            <div className="header-wrapper">
               <button type="button" onClick={handleBackButtonClick} className="header-button">
                 <SvgIcon className="arrow-icon">
                   <ArrowBackIcon />
                 </SvgIcon>
               </button>
+              <h1 className="contact-page-title">Contacts</h1>
               <button type="button" onClick={handleAddNewContact} className="header-button">
                 <SvgIcon>
                   <PersonAddIcon />
                 </SvgIcon>
               </button>
             </div>
-            <h1 className="contact-page-title">Contacts</h1>
           </header>
           <div className="contacts-container">
             {contacts.map((contact: any) => {
