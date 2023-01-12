@@ -1,4 +1,7 @@
 .card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%),
   0 2px 4px -1px rgb(0 0 0 / 30%);
   padding: 25px;
@@ -81,4 +84,23 @@
 
 .contact-data-text {
   margin-left: 10px;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.MuiSvgIcon-root.avatar-icon {
+  width: 90px;
+  height: 90px;
+  color: #87ceeb;
+  cursor: pointer;
+
+  &:hover {
+    svg {
+      fill: #4682b4;
+      transition: all 0.3s;
+    }
+  }
 }
