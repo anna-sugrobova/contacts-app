@@ -2,12 +2,23 @@
 
 It's a small app to view and edit contacts, built with React, Redux, TypeScript
 
+![Contacts App DEMO](https://user-images.githubusercontent.com/65123309/212162896-f326a163-a1c4-4c9a-b592-6ec7515e6102.gif)
+
 [Check the Demo](https://contacts-app-sigma-one.vercel.app/contacts)
 
 ### Usage
 
-You can login with any credentials. Then you'll see nice cards with random users. You can edit any user data, save
-changes, delete any user.
+You can login with any credentials. Then you'll see nice cards with random users.
+
+The application allows to: 
+
+- **edit** any existing user data
+- **save** changed user
+- **delete** any user
+- **add** a new user with any personal data
+- **upload** an image from your computer to add a nice avatar to your new user
+
+You can create new users **with** or **without** uploading an avatar. 
 
 ### Stack
 
