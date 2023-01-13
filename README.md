@@ -1,6 +1,6 @@
 # Contacts App
 
-It's a small app to interacte with a contacts list, built with React, Redux, TypeScript
+It's a small app to interact with a contacts list, built with React, Redux, TypeScript
 
 ![Contacts App preview](https://user-images.githubusercontent.com/65123309/212175556-9f200138-7778-426b-94d2-00b59a9291db.gif)
 
